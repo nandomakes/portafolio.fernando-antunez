@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fernando Antúnez — Desarrollador Web</title>
+  <!-- SEO primario -->
+  <meta name="description" content="Portafolio de Fernando Antúnez, desarrollador web. Aplicaciones modernas con HTML, CSS, JavaScript, React, Node.js, Python y más." />
+  <meta name="robots" content="index, follow" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Fernando Antúnez — Desarrollador Web" />
+  <meta property="og:description" content="Portafolio de Fernando Antúnez, desarrollador web. Aplicaciones modernas con HTML, CSS, JavaScript, React, Node.js, Python y más." />
+  <meta property="og:image" content="proyectos imagenes/proyecto1_publicado.png" />
+  <!-- TODO: reemplaza el og:url con tu dominio real cuando publiques -->
+  <!-- <meta property="og:url" content="https://tu-dominio.com/portafolio.html" /> -->
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Fernando Antúnez — Desarrollador Web" />
+  <meta name="twitter:description" content="Portafolio de Fernando Antúnez, desarrollador web. Aplicaciones modernas con HTML, CSS, JavaScript, React, Node.js, Python y más." />
+  <meta name="twitter:image" content="proyectos imagenes/proyecto1_publicado.png" />
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232563eb'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' fill='white' font-family='system-ui' font-weight='700' font-size='15'>FA</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0b0d14;
+      --bg2:       #111320;
+      --bg3:       #181b2e;
+      --border:    rgba(255,255,255,.07);
+      --accent:    #2563eb;
+      --accent2:   #60a5fa;
+      --text:      #e2e4f0;
+      --muted:     #7b7f9e;
+      --card-bg:   #13162a;
+      --radius:    14px;
+      --transition: .25s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 99px; }
+
+    /* ── Navbar ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+      background: rgba(11,13,20,.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -.5px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--accent2); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 500;
+      letter-spacing: .02em;
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Hero ── */
+    #inicio {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 5% 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* fondo con gradiente radial sutil */
+    #inicio::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(37,99,235,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(96,165,250,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(37,99,235,.15);
+      border: 1px solid rgba(37,99,235,.35);
+      color: var(--accent2);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .35rem 1rem;
+      border-radius: 99px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: .6rem;
+      background: linear-gradient(135deg, #fff 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      color: var(--accent2);
+      font-weight: 600;
+      letter-spacing: .06em;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(.95rem, 2vw, 1.15rem);
+      color: var(--muted);
+      max-width: 520px;
+      font-weight: 400;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--accent);
+      color: #fff;
+      font-size: .95rem;
+      font-weight: 600;
+      padding: .8rem 2rem;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 24px rgba(37,99,235,.35);
+    }
+
+    .hero-cta:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(37,99,235,.5);
+    }
+
+    /* flecha decorativa */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .3rem;
+      color: var(--muted);
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .scroll-hint svg {
+      width: 20px; height: 20px;
+      animation: bounce 1.6s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(6px); }
+    }
+
+    /* ── Sections shared ── */
+    section { padding: 6rem 5%; }
+
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: .6rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title span { color: var(--accent2); }
+
+    /* ── Projects grid ── */
+    #proyectos { background: var(--bg2); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.015);
+      box-shadow: 0 20px 60px rgba(37,99,235,.2), 0 0 0 1px rgba(37,99,235,.25);
+      border-color: rgba(37,99,235,.4);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
+    }
+
+    .card:hover .card-img-wrap img { transform: scale(1.06); }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      flex-wrap: wrap;
+      margin-bottom: .45rem;
+    }
+
+    .card-title-row .card-title { margin-bottom: 0; }
+
+    .card-status {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .22rem .65rem;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+
+    .status-live    { background: rgba(34,197,94,.2);  color: #4ade80; border: 1px solid rgba(34,197,94,.3); }
+    .status-dev     { background: rgba(251,191,36,.15); color: #fbbf24; border: 1px solid rgba(251,191,36,.3); }
+    .status-pending { background: rgba(99,102,241,.15); color: #818cf8; border: 1px solid rgba(99,102,241,.3); }
+
+    .card-body {
+      padding: 1.25rem 1.4rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: .45rem;
+      color: #fff;
+      letter-spacing: -.3px;
+    }
+
+    .card-desc {
+      font-size: .875rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .tag {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      padding: .25rem .65rem;
+      border-radius: 99px;
+      background: rgba(37,99,235,.12);
+      border: 1px solid rgba(37,99,235,.25);
+      color: var(--accent2);
+    }
+
+    .card-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .4rem;
+      background: transparent;
+      border: 1px solid rgba(37,99,235,.4);
+      color: var(--accent2);
+      font-size: .82rem;
+      font-weight: 600;
+      padding: .6rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      align-self: flex-start;
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+    }
+
+    .card-btn:hover {
+      background: rgba(37,99,235,.2);
+      border-color: var(--accent2);
+      color: #fff;
+    }
+
+    /* ── About ── */
+    #sobre-mi {
+      background: var(--bg);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* hacemos que la sección sea un wrapper */
+    .about-section {
+      background: var(--bg);
+      padding: 6rem 5%;
+    }
+
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    /* ── Foto card ── */
+    .about-photo-card {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 16px;
+      border: 2px dashed rgba(37,99,235,.35);
+      background: var(--card-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .75rem;
+      color: var(--muted);
+      font-size: .8rem;
+      font-weight: 500;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .about-photo-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border-radius: 14px;
+    }
+
+    .photo-placeholder svg {
+      width: 40px;
+      height: 40px;
+      opacity: .35;
+    }
+
+    .photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .photo-placeholder span {
+      font-size: .75rem;
+      color: var(--muted);
+      opacity: .7;
+    }
+
+    /* ── About right column ── */
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-text strong { color: var(--text); }
+
+    .about-skills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+    }
+
+    .skill-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .85rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: border-color var(--transition), background var(--transition);
+    }
+
+    .skill-item:hover {
+      border-color: rgba(37,99,235,.35);
+      background: rgba(37,99,235,.06);
+    }
+
+    .skill-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent2);
+      flex-shrink: 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 3rem 5%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -.4px;
+    }
+
+    .footer-name span { color: var(--accent2); }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--accent2); }
+
+    .footer-links svg {
+      width: 18px; height: 18px;
+      fill: currentColor;
+    }
+
+    .footer-copy {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    /* ── Divider line ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: .3;
+      margin: 0 5%;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .about-photo-card {
+        aspect-ratio: 1/1;
+        max-width: 200px;
+        margin: 0 auto;
+      }
+
+      .about-skills {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      footer { padding: 2.5rem 5%; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+
+      section { padding: 4.5rem 5%; }
+      .about-section { padding: 4.5rem 5%; }
+    }
+
+    @media (max-width: 480px) {
+      .about-skills { grid-template-columns: 1fr; }
+    }
+
+    /* ── Accesibilidad: contenido solo para lectores de pantalla ── */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0;
+      margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0;
+    }
+  </style>
+
+  <!-- Schema.org — Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Fernando Antúnez",
+    "jobTitle": "Desarrollador Web",
+    "knowsAbout": ["HTML", "CSS", "JavaScript", "React", "Next.js", "Node.js", "Python", "SQL", "MongoDB"],
+    "url": "",
+    "sameAs": []
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <nav aria-label="Navegación principal">
+    <a href="#inicio" class="nav-logo">Portafolio</a>
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#sobre-mi-section">Sobre mí</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+  <!-- ── Hero ── -->
+  <section id="inicio">
+    <h1 class="hero-name">Fernando Antúnez</h1>
+    <h2 class="hero-title">Desarrollador Web</h2>
+    <p class="hero-subtitle">
+      Construyo experiencias digitales limpias, rápidas y funcionales.<br>
+      Del diseño al despliegue, con atención al detalle.
+    </p>
+    <a href="#proyectos" class="hero-cta">
+      Ver proyectos
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── Projects ── -->
+  <section id="proyectos">
+    <div style="max-width:1100px; margin:0 auto;">
+      <p class="section-label">Portafolio</p>
+      <h2 class="section-title">Mis <span>proyectos</span></h2>
+
+      <div class="projects-grid">
+
+        <!-- Proyecto 1 -->
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="proyectos imagenes/hero1.png" alt="Hero Proyecto 1" />
+          </div>
+          <div class="card-body">
+            <div class="card-title-row">
+              <h3 class="card-title">AutoTech Industrial Solutions</h3>
+              <span class="card-status status-live">Publicado</span>
+            </div>
+            <p class="card-desc">Rediseño completo para empresa industrial ubicada en EE.UU. Nuevo sitio que comunica su catálogo de servicios con una identidad visual moderna, profesional y orientada al mercado norteamericano.</p>
+            <div class="card-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JS</span>
+              <span class="tag">PHP</span>
+            </div>
+            <a href="https://autotechindustrialsolutions.com/" target="_blank" rel="noopener" class="card-btn">
+              Ver sitio
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Proyecto 2 -->
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="proyectos imagenes/hero2.png" alt="Hero Proyecto 2" />
+          </div>
+          <div class="card-body">
+            <div class="card-title-row">
+              <h3 class="card-title">Agencia de Automatización Digital</h3>
+              <span class="card-status status-dev">En desarrollo</span>
+            </div>
+            <p class="card-desc">Sitio web para agencia B2B especializada en automatización de procesos digitales. Diseño orientado a conversión, próximo a lanzarse al mercado.</p>
+            <div class="card-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JS</span>
+              <span class="tag">PHP</span>
+            </div>
+            <a href="proyecto2.html" target="_blank" rel="noopener" class="card-btn">
+              Ver sitio
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Proyecto 3 -->
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="proyectos imagenes/hero3.png" alt="Hero Proyecto 3" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-title-row">
+              <h3 class="card-title">Estudio de Pilates</h3>
+              <span class="card-status status-dev">En desarrollo</span>
+            </div>
+            <p class="card-desc">Primera presencia digital para estudio de Pilates. Plataforma que simplifica la reserva de clases y permite a la instructora gestionar su agenda y atraer nuevos clientes con facilidad.</p>
+            <div class="card-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JS</span>
+              <span class="tag">PHP</span>
+            </div>
+            <a href="proyecto3.html" target="_blank" rel="noopener" class="card-btn">
+              Ver sitio
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Proyecto 4 -->
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="proyectos imagenes/hero4.png" alt="Hero Proyecto 4" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-title-row">
+              <h3 class="card-title">AutoTech México</h3>
+              <span class="card-status status-pending">En proceso</span>
+            </div>
+            <p class="card-desc">Catálogo digital derivado de AutoTech Industrial Solutions, adaptado para el mercado mexicano. Permite a clientes en todo México explorar y adquirir productos de la marca de forma directa.</p>
+            <div class="card-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JS</span>
+              <span class="tag">PHP</span>
+              <span class="tag">JSON</span>
+              <span class="tag">Python</span>
+              <span class="tag">API</span>
+            </div>
+            <a href="https://nandomakes.github.io/autotech-mexico/" target="_blank" rel="noopener" class="card-btn">
+              Ver sitio
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Proyecto 5 -->
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="proyectos imagenes/hero5.png" alt="Hero Proyecto 5" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-title-row">
+              <h3 class="card-title">Nutrióloga — Marca Personal</h3>
+              <span class="card-status status-dev">En desarrollo</span>
+            </div>
+            <p class="card-desc">Sitio de marca personal para nutrióloga, diseñado para transmitir confianza y profesionalismo. Incluye una vía directa para que sus pacientes agenden citas sin fricciones.</p>
+            <div class="card-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JS</span>
+              <span class="tag">PHP</span>
+              <span class="tag">JSON</span>
+              <span class="tag">Node</span>
+              <span class="tag">MJS</span>
+              <span class="tag">Next</span>
+            </div>
+            <a href="proyecto5.html" target="_blank" rel="noopener" class="card-btn">
+              Ver sitio
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Proyecto 6 -->
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="proyectos imagenes/hero6.png" alt="Hero Proyecto 6" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-title-row">
+              <h3 class="card-title">Restaurante SLP</h3>
+              <span class="card-status status-dev">En desarrollo</span>
+            </div>
+            <p class="card-desc">Primera presencia web para restaurante en San Luis Potosí. Menú digital atractivo y fácil de consultar que mejora la experiencia del comensal desde antes de llegar al local.</p>
+            <div class="card-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JS</span>
+            </div>
+            <a href="proyecto6.html" target="_blank" rel="noopener" class="card-btn">
+              Ver sitio
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Proyecto 7 -->
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="proyectos imagenes/hero7.png" alt="Hero Proyecto 7" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-title-row">
+              <h3 class="card-title">Ecommerce — EE.UU.</h3>
+              <span class="card-status status-pending">En proceso</span>
+            </div>
+            <p class="card-desc">Rediseño de tienda en línea para empresa estadounidense. Enfoque en experiencia de compra moderna, navegación intuitiva y mayor tasa de conversión.</p>
+            <div class="card-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JS</span>
+            </div>
+            <a href="https://nandomakes.github.io/painterspal/" target="_blank" rel="noopener" class="card-btn">
+              Ver sitio
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── About ── -->
+  <section class="about-section" id="sobre-mi-section">
+    <div class="about-inner">
+
+      <div class="about-photo-card">
+        <img src="proyectos imagenes/sobremi.png" alt="Fernando Antúnez" />
+      </div>
+
+      <div class="about-right">
+        <div class="about-text">
+          <p class="section-label">Sobre mí</p>
+          <h2 class="section-title" style="margin-bottom:1.5rem;">Desarrollador <span>apasionado</span><br>por la web</h2>
+          <p>Soy <strong>Fernando Antúnez</strong>, diseñador y desarrollador de sitios web con enfoque en crear presencias digitales modernas, atractivas y funcionales. Me especializo en llevar la identidad de cada marca a la web con diseños que conectan con su audiencia y generan resultados reales.</p>
+          <p>Trabajo tanto en frontend como en backend, y me gusta entender el producto de principio a fin. Aprendo constantemente y disfruto resolver problemas complejos con soluciones simples.</p>
+          <p>Cuando no estoy programando, exploro nuevas tecnologías, leo sobre diseño o contribuyo a proyectos open source.</p>
+        </div>
+        <div class="about-skills">
+          <div class="skill-item"><span class="skill-dot"></span> HTML / CSS</div>
+          <div class="skill-item"><span class="skill-dot"></span> JavaScript</div>
+          <div class="skill-item"><span class="skill-dot"></span> React / Next.js</div>
+          <div class="skill-item"><span class="skill-dot"></span> Node.js</div>
+          <div class="skill-item"><span class="skill-dot"></span> Python</div>
+          <div class="skill-item"><span class="skill-dot"></span> Git / GitHub</div>
+          <div class="skill-item"><span class="skill-dot"></span> SQL / MongoDB</div>
+          <div class="skill-item"><span class="skill-dot"></span> Diseño UI</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer id="contacto">
+    <p class="footer-name">Portafolio</p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/fernando-antunez/" target="_blank" rel="me noopener">
+        <svg aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM6.9 20.45H3.56V9H6.9v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+        LinkedIn
+      </a>
+      <a href="mailto:fernantu99@gmail.com">
+        <svg aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Email
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>
