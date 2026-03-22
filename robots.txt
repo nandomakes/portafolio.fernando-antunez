@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: cuando publiques el sitio, reemplaza la URL del sitemap con tu dominio real
+Sitemap: https://tu-dominio.com/sitemap.xml
